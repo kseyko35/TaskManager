@@ -1,8 +1,11 @@
-package com.example.taskmanager
+package com.example.taskmanager.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.taskmanager.view.fragment.InNextDayFragment
+import com.example.taskmanager.view.fragment.TodayFragment
+import com.example.taskmanager.view.fragment.TomorrowFragment
 
 
 /**     Code with ❤
@@ -26,7 +29,7 @@ class TabPagerAdapter(fm: FragmentManager) :
             }
             1 -> TomorrowFragment()
             else -> {
-                return InWeekFragment()
+                return InNextDayFragment()
             }
         }
     }
@@ -37,10 +40,10 @@ class TabPagerAdapter(fm: FragmentManager) :
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Today's Tasks"
-            1 -> "Tomorrow's Tasks"
+            0 -> "Today"
+            1 -> "Tomorrow"
             else -> {
-                return "In Week Tasks"
+                return "Next Days"
             }
         }
     }
