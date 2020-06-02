@@ -14,8 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Widget.AppCompat.ActionBar"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:popupTheme="@style/Widget.AppCompat.PopupMenu"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toolbar Title"
+                android:textSize="25sp"
+                android:id="@+id/toolbar_title" />
+        </androidx.appcompat.widget.Toolbar>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mTabsMain"
             android:layout_width="match_parent"
@@ -29,10 +36,15 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -46,65 +58,3 @@
         android:focusable="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    tools:context=".MainActivity">-->
-
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/mTabsMain"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:tabMode="fixed" />-->
-
-<!--    <androidx.viewpager.widget.ViewPager-->
-<!--        android:id="@+id/mViewPager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="664dp"-->
-<!--        androi-->
-<!--        ></androidx.viewpager.widget.ViewPager>-->
-
-
-<!--    <EditText-->
-<!--        android:id="@+id/mNameTask"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:hint="Task Name" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/mDescriptionTask"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        tools:viewBindingIgnore="true"-->
-<!--        android:hint="Task Description" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/mAddBtn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Add your task" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/mFindText"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Search Title" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/mFindBtn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Find with name" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/mResultText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        />-->
-
-
-<!--</FrameLayout>-->
