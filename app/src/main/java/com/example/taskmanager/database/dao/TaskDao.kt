@@ -1,8 +1,8 @@
-package com.example.taskmanager.dao
+package com.example.taskmanager.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.taskmanager.entity.Task
+import com.example.taskmanager.database.entity.Task
 
 
 /**     Code with ❤
