@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.databinding.TaskItemBinding
-import com.example.taskmanager.entity.Task
+import com.example.taskmanager.database.entity.Task
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,7 +28,16 @@ class TaskListAdapter internal constructor(context: Context) :
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var tasks = emptyList<Task>() // Cached copy of words
     private val dateFormat: DateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.US)
-    inner class TaskViewHolder(val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+
+    inner class TaskViewHolder(val binding: TaskItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+//        override fun onClick(v: View?) {
+//            onClickListener.onTaskClick(position)
+//        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = TaskItemBinding.inflate(inflater, parent, false)
@@ -39,15 +48,41 @@ class TaskListAdapter internal constructor(context: Context) :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current: Task = tasks[position]
-        holder.binding.mTextDate.text = current.taskName
+
+        holder.binding.mTextName.text = current.taskName
         holder.binding.mTextDescription.text = current.taskDescription
         if (current.taskDayType == 1 || current.taskDayType == 2)
             holder.binding.mTextDate.visibility = View.GONE
         else holder.binding.mTextDate.text = dateFormat.format(current.taskDate)
+//        holder.itemView.setOnClickListener{
+//            getTaskAt(position)
+//            AlertDialog.Builder()
+//                .setCancelable(false)
+//                .setTitle("Alert Dialog")
+//                .setMessage("This is alert Dialog Message Sample text")
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+//                .setNegativeButton("Close", DialogInterface.OnClickListener { dialog, which ->
+//                    print("asdasadasads")
+//                }).setPositiveButton("Ok", DialogInterface.OnClickListener
+//                { dialog, which ->
+//                    print("asdasadasads")
+//                }).create().show()
+//        }
+
     }
+    interface OnClickListener{
+        fun onTaskClick(position: Int)
+    }
+
+
 
     internal fun setTasks(tasks: List<Task>) {
         this.tasks = tasks
         notifyDataSetChanged()
     }
+    fun getTaskAt(position: Int): Task {
+        return tasks[position]
+    }
+
+
 }
