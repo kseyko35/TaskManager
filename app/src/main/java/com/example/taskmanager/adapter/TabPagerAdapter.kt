@@ -24,9 +24,7 @@ class TabPagerAdapter(fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> {
-                TodayFragment()
-            }
+            0 -> TodayFragment()
             1 -> TomorrowFragment()
             else -> {
                 return InNextDayFragment()

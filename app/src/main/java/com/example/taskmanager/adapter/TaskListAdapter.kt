@@ -26,7 +26,7 @@ class TaskListAdapter internal constructor(context: Context) :
     RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var tasks = emptyList<Task>() // Cached copy of words
+    private var tasks = emptyList<Task>() // Cached copy of task
     private val dateFormat: DateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.US)
 
 

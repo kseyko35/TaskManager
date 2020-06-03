@@ -2,11 +2,10 @@ package com.example.taskmanager.database
 
 import android.content.Context
 import androidx.room.Database
-import androidx.room.Entity
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.taskmanager.dao.TaskDao
-import com.example.taskmanager.entity.Task
+import com.example.taskmanager.database.dao.TaskDao
+import com.example.taskmanager.database.entity.Task
 
 
 /**     Code with ❤
@@ -18,37 +17,35 @@ import com.example.taskmanager.entity.Task
 ║        30,May,2020         ║
 ╚════════════════════════════╝
  */
-@Database(entities = [Task::class],version = 1 )
-abstract class AppDatabase : RoomDatabase(){
+@Database(entities = [Task::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 
-//    companion object {
-//        var INSTANCE: AppDatabase? = null
-//
-//        fun getDatabaseManager(context: Context): AppDatabase? {
-//            if (INSTANCE == null) {
-//                INSTANCE = Room.databaseBuilder(
-//                    context.applicationContext,
-//                    AppDatabase::class.java,
-//                    "book-database"
-//                ).allowMainThreadQueries()
-//                    .build()
-//            }
-//            return INSTANCE
-//        }
-//
-//
-//    }
     companion object {
-        @Volatile private var instance: AppDatabase? = null
-        private val LOCK = Any()
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
-        operator fun invoke(context: Context)= instance ?: synchronized(LOCK){
-            instance ?: buildDatabase(context).also { instance = it}
+        fun getDatabase(
+            context: Context
+        ): AppDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "task_db"
+                )
+                    // Wipes and rebuilds instead of migrating if no Migration object.
+                    // Migration is not part of this codelab.
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                // return instance
+                instance
+            }
         }
 
-        private fun buildDatabase(context: Context) = Room.databaseBuilder(context,
-            AppDatabase::class.java, "task-list.db")
-            .build()
+
     }
 }
